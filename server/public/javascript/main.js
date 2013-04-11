@@ -20,25 +20,31 @@ TiShadow.init = function (session, guest){
   TiShadow.socket = socket;
 };
 
+var firepad;
+var sentData = function(){
+    var code = firepad.getText();
+    TiShadow.socket.emit("snippet", {code: code});
+  }
 
 $(document).ready(function() {
   TiShadow.init();
-  var editor = ace.edit("editor");
-  editor.setTheme("ace/theme/twilight");
-  var JavaScriptMode = require("ace/mode/javascript").Mode;
-  editor.getSession().setMode(new JavaScriptMode());
 
-  $("input#tisubmit").click(function() {
-    TiShadow.socket.emit("snippet", {code: editor.getSession().getValue()});
+  //// Initialize Firebase.
+  // var ref = new Firebase('<YOUR FIREBASE URL>');
+  var firepadRef = getExampleRef();
+
+  //// Create CodeMirror (with line numbers and the JavaScript mode).
+  var codeMirror = CodeMirror(document.getElementById('editor'), {
+    lineNumbers: true,
+    mode: 'javascript'
   });
 
-  $("#editor").keypress(function (event) {
-    if ((event.which == 115 && event.ctrlKey) || (event.which == 115 && event.metaKey)){
-      $("input#tisubmit").click();
-      event.preventDefault();
-      return false;
-    }
-  });
+  //// Create Firepad.
+  firepad = Firepad.fromCodeMirror(firepadRef, codeMirror);
+
+  if (firepad.isHistoryEmpty()) {
+    firepad.setText('alert("Hello from your Titanium Code.");');
+  }
 
 });
 
