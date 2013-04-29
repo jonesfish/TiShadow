@@ -98,21 +98,33 @@ exports.launchApp = function(name) {
     log.error(utils.extractExceptionData(e));
   }
 };
+
 exports.clearCache = function() {
+  var dirty_directories = [Ti.Filesystem.applicationDataDirectory];
+  if (Ti.UI.iOS) {
+    var applicationDatabaseDirectory = Ti.Filesystem.applicationDataDirectory.replace("Documents/","") + "Library/Private%20Documents/";
+    if (Ti.Filesystem.getFile(applicationDatabaseDirectory).exists()) {
+      dirty_directories.push(applicationDatabaseDirectory);
+    }
+  }
+
   try {
-    var files = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory).getDirectoryListing();
-    files.forEach(function(file_name) {
-      var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory,file_name);
-      if (Ti.Platform.osname === "android") {
-        if (file.isFile()) {
+    dirty_directories.forEach(function(targetDirectory) {
+      // Clear Applications
+      var files = Ti.Filesystem.getFile(targetDirectory).getDirectoryListing();
+      files.forEach(function(file_name) {
+        var file = Ti.Filesystem.getFile(targetDirectory,file_name);
+        if (Ti.Platform.osname === "android") {
+          if (file.isFile()) {
+            file.deleteFile();
+          } else if (file.isDirectory()) {
+            file.deleteDirectory(true);
+          }
+        } else {
           file.deleteFile();
-        } else if (file.isDirectory()) {
           file.deleteDirectory(true);
         }
-      } else {
-        file.deleteFile();
-        file.deleteDirectory(true);
-      }
+      });
     });
     Ti.App.fireEvent("tishadow:refresh_list");
   } catch (e) {
