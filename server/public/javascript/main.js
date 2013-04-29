@@ -5,7 +5,9 @@ TiShadow.init = function (session, guest){
     socket.emit("join", {name: 'controller'});
   });
   socket.on('device_connect', function(e){
-    $(".device_list").append('<li id="'+ e.id + '">' + e.name + '</li>');
+    if($("#" + e.id).length === 0){
+      $(".device_list").append('<li id="'+ e.id + '">' + e.name + '</li>');
+    }
   });
   socket.on('device_disconnect', function(e){
     $("li#" + e.id).remove();
