@@ -42,10 +42,11 @@ $(document).ready(function() {
   //// Create Firepad.
   firepad = Firepad.fromCodeMirror(firepadRef, codeMirror);
 
-  if (firepad.isHistoryEmpty()) {
-    firepad.setText('alert("Hello from your Titanium Code.");');
-  }
-
+  firepad.on('ready', function() {
+    if (firepad.isHistoryEmpty()) {
+        firepad.setText('alert("Hello from your Titanium Code.");');
+      }
+  });
 });
 
 
