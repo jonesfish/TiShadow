@@ -26,6 +26,15 @@ var sentData = function(){
     TiShadow.socket.emit("snippet", {code: code});
   }
 
+function get_random_color() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
+}
+
 $(document).ready(function() {
   TiShadow.init();
 
@@ -39,10 +48,29 @@ $(document).ready(function() {
     mode: 'javascript'
   });
 
+  var userColor = get_random_color();
   //// Create Firepad.
-  firepad = Firepad.fromCodeMirror(firepadRef, codeMirror);
+  firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {userColor: userColor});
 
   firepad.on('ready', function() {
+    $('#colorpicker').minicolors({
+          control: $(this).attr('data-control') || 'hue',
+          defaultValue: $(this).attr('data-default-value') || '',
+          inline: $(this).hasClass('inline'),
+          letterCase: $(this).hasClass('uppercase') ? 'uppercase' : 'lowercase',
+          opacity: $(this).hasClass('opacity'),
+          position: $(this).attr('data-position') || 'default',
+          styles: $(this).attr('data-style') || '',
+          swatchPosition: $(this).attr('data-swatch-position') || 'left',
+          textfield: !$(this).hasClass('no-textfield'),
+          theme: $(this).attr('data-theme') || 'default',
+          defaultValue: userColor,
+          change: function(hex, opacity) {
+              firepad.setUserColor(hex);
+              console.log(hex);
+          }
+      });
+    $('#colorpicker').show();
     if (firepad.isHistoryEmpty()) {
         firepad.setText('alert("Hello from your Titanium Code.");');
       }
