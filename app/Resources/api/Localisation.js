@@ -6,9 +6,12 @@ function loadFile() {
   lookup = {};
   var file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory + TiShadow.currentApp + "/" + exports.locale + "/strings.xml");
   if (!file.exists()) {
-    log.warn(Ti.Filesystem.applicationDataDirectory + TiShadow.currentApp + "/" + exports.locale + "/strings.xml");
-    log.warn("Language file for '" + exports.locale + "' does not exist");
-    return;
+    file = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory + TiShadow.currentApp + "/en/strings.xml");
+    if (!file.exists()) {
+      log.warn(Ti.Filesystem.applicationDataDirectory + TiShadow.currentApp + "/" + exports.locale + "/strings.xml");
+      log.warn("Language file for both '" + exports.locale + "' and 'en' fallback do not exist");
+      return;
+    }
   }
   var xml_string = file.read().text;
   var doc = Ti.XML.parseString(xml_string);
@@ -29,9 +32,9 @@ function loadFile() {
 exports.clear = function () {
   lookup = null;
 };
-exports.fetchString = function (string) {
+exports.fetchString = function (string, hint) {
   if (lookup === null) {
     loadFile();
   }
-  return lookup[string] !== undefined ? lookup[string].replace(/\\n/g,"\n") : string;
+  return lookup[string] !== undefined ? lookup[string].replace(/\\n/g,"\n") : (hint || string);
 };

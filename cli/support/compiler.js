@@ -16,7 +16,7 @@ function prepare(src, dst, callback) {
     var src_text = "var __p = require('/api/PlatformRequire'), __log = require('/api/Log'), assert = require('/api/Assert'), L = require('/api/Localisation').fetchString;\n" 
       + fs.readFileSync(src).toString()
       .replace(/Ti(tanium)?.Filesystem.(resourcesDirectory|getResourcesDirectory\(\))/g, "Ti.Filesystem.applicationDataDirectory + '"+app_name.replace(/ /g,"_")+"/'")
-      .replace(/require\(/g, "__p.require(")
+      .replace(/(^|[^\.])require\(/g, "$1__p.require(")
       .replace(/Ti(tanium)?.include\(/g, "__p.include(this,")
       .replace(/Ti.Locale.getString/g, "L")
       .replace(/([ :=\(])(['"])(\/[^'"].*?)(['"])/g, "$1__p.file($2$3$4)") // ignores "/"
@@ -24,6 +24,7 @@ function prepare(src, dst, callback) {
       .replace(/\.(title|text)id\s{0,}\=\s{0,}['"](\w+)['"]/g, '.$1 = L(\'$2\')')
       // Replace strings like "titleid: 'save'" -> "title: L('save')"
       .replace(/\b(title|text)id:\s{0,}['"](\w+)['"]/g, '$1: L(\'$2\')')
+      .replace(/console./g, "__log.")
       .replace(/Ti(tanium)?.API/g, "__log");
     if (src.match("_spec.js$")) {
       src_text =  "var __jasmine = require('/lib/jasmine-1.2.0');var methods = ['spyOn','it','xit','expect','runs','waits','waitsFor','beforeEach','afterEach','describe','xdescribe','jasmine'];methods.forEach(function(method) {this[method] = __jasmine[method];});"
