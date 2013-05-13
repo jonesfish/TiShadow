@@ -57,7 +57,7 @@ var FirepadUserList = (function() {
   FirepadUserList.prototype.makeUserEntryForSelf_ = function() {
     var myUserRef = this.ref_.child(this.userId_);
 
-    var colorDiv = elt('div', null, { 'class': 'firepad-userlist-color-indicator' });
+    var colorDiv = elt('div', null, { 'id': 'colorpicker','class': 'firepad-userlist-color-indicator' });
     this.firebaseOn_(myUserRef.child('color'), 'value', function(colorSnapshot) {
       var color = colorSnapshot.val();
       if (typeof color === 'string' && color.match(/^#[a-fA-F0-9]{3,6}$/)) {

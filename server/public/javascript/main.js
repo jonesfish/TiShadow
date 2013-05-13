@@ -5,9 +5,7 @@ TiShadow.init = function (session, guest){
     socket.emit("join", {name: 'controller'});
   });
   socket.on('device_connect', function(e){
-    if($("#" + e.id).length === 0){
       $(".device_list").append('<li id="'+ e.id + '">' + e.name + '</li>');
-    }
   });
   socket.on('device_disconnect', function(e){
     $("li#" + e.id).remove();
@@ -41,8 +39,7 @@ $(document).ready(function() {
   TiShadow.init();
 
   //// Initialize Firebase.
-  // var ref = new Firebase('<YOUR FIREBASE URL>');
-  var firepadRef = getExampleRef();
+  var firepadRef = new Firebase('tishadow-collaboration.firebaseIO.com/');
 
   //// Create CodeMirror (with line numbers and the JavaScript mode).
   var codeMirror = CodeMirror(document.getElementById('editor'), {
@@ -50,23 +47,35 @@ $(document).ready(function() {
     mode: 'javascript'
   });
 
+  // Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
+    var userId = Math.floor(Math.random() * 9999999999).toString();
+
   var userColor = get_random_color();
   //// Create Firepad.
-  firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {userColor: userColor});
+  firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {userId:userId, userColor: userColor});
+
+  var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
+          document.getElementById('user_list'), userId);
 
   firepad.on('ready', function() {
     $('#colorpicker').minicolors({
           control: $(this).attr('data-control') || 'hue',
           defaultValue: $(this).attr('data-default-value') || '',
-          inline: $(this).hasClass('inline'),
+          inline: false,
           letterCase: $(this).hasClass('uppercase') ? 'uppercase' : 'lowercase',
           opacity: $(this).hasClass('opacity'),
           position: $(this).attr('data-position') || 'default',
           styles: $(this).attr('data-style') || '',
           swatchPosition: $(this).attr('data-swatch-position') || 'left',
-          textfield: !$(this).hasClass('no-textfield'),
+          textfield: false,
           theme: $(this).attr('data-theme') || 'default',
           defaultValue: userColor,
+          show: function(){
+            $('.firepad-userlist-user:eq(0)').height('180px');
+          },
+          hide: function(){
+            $('.firepad-userlist-user:eq(0)').height('40px');
+          },
           change: function(hex, opacity) {
               firepad.setUserColor(hex);
               console.log(hex);

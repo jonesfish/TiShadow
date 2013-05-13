@@ -43,13 +43,22 @@
 
 .minicolors-swatch {
 	position: relative;
-	width: 20px;
-	height: 20px;
-	text-align: left;
+	//width: 20px;
+	//height: 20px;
+	//text-align: left;
 	background: url(jquery.minicolors.png) -80px 0;
 	border: solid 1px #CCC;
 	vertical-align: middle;
 	display: inline-block;
+
+	//////////
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 
 .minicolors-swatch SPAN {
