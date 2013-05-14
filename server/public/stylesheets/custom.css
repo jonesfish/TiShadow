@@ -20,7 +20,7 @@
 }
 
 .topbar .brand {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .topbar .button {
@@ -100,4 +100,8 @@ html, body {
 .footer {
   background: #ccc;
   height: 200px;
+}
+
+.footer h3 {
+  margin-left: 10px;
 }
