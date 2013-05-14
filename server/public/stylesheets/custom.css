@@ -27,6 +27,13 @@
 	border: 0;
   margin-right: 10px;
 }
+
+.footer .button {
+  border: 0;
+  margin-right: 10px;
+  margin-top: -3px;
+}
+
 .status {
 	float: left
 }

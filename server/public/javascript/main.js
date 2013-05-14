@@ -26,6 +26,10 @@ var sentData = function(){
     TiShadow.socket.emit("snippet", {code: code});
   }
 
+var clearConsole = function(){
+  $('.console').html('');
+}
+
 function sentCodeInit() {
   var lastKey;
   $(window).bind('keydown',function(e){
