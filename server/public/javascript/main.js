@@ -26,6 +26,19 @@ var sentData = function(){
     TiShadow.socket.emit("snippet", {code: code});
   }
 
+function sentCodeInit() {
+  var lastKey;
+  $(window).bind('keydown',function(e){
+    if( lastKey && (lastKey == 91 && e.keyCode == 83) || (lastKey == 83 && e.keyCode == 91) ){
+      e.preventDefault();
+      console.log('ctrl+s');
+      sentData();
+      return false;
+    }
+    lastKey = e.keyCode;
+  });
+}
+
 function get_random_color() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -58,6 +71,7 @@ $(document).ready(function() {
           document.getElementById('user_list'), userId);
 
   firepad.on('ready', function() {
+    sentCodeInit();
     $('#colorpicker').minicolors({
           control: $(this).attr('data-control') || 'hue',
           defaultValue: $(this).attr('data-default-value') || '',
