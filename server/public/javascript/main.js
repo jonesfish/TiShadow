@@ -39,7 +39,7 @@ $(document).ready(function() {
   TiShadow.init();
 
   //// Initialize Firebase.
-  var firepadRef = new Firebase('tishadow-collaboration.firebaseIO.com/');
+  var firepadRef = getFirepadRef();
 
   //// Create CodeMirror (with line numbers and the JavaScript mode).
   var codeMirror = CodeMirror(document.getElementById('editor'), {
