@@ -1,15 +1,12 @@
 /* Override some defaults */
-.container > footer p {
-	text-align: center; /* center align it with the container */
-}
 .container {
-	width: 790px;
+	width: 100%;
 }
 /* The white background content wrapper */
 .content {
 	background-color: #fff;
-	margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-	width: 1024px;
+	//margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+	//width: 1024px;
 }
 /* Page header tweaks */
 .page-header {
@@ -18,11 +15,17 @@
   margin: -20px -20px 20px;
 }
 .button {
+  margin-top: 8px;
   float: right;
-  margin-top: -30px;
 }
-.topbar .btn {
+
+.topbar .brand {
+  margin-left: 10px;
+}
+
+.topbar .button {
 	border: 0;
+  margin-right: 10px;
 }
 .status {
 	float: left
@@ -36,12 +39,12 @@ li {
   font-size: 12px;
 }
 #editor {
-        position: relative;
-        width: 520px;
-        height: 400px;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 .console {
-  height: 300px;
+  height: 200px;
   overflow: auto;
   background-color: #000;
 }
@@ -52,4 +55,42 @@ li {
 
 .minicolors {
   margin-top: 8px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.container-fluid {
+    margin: 0 auto;
+    height: 100%;
+    padding: 20px 0;
+ 
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.container-fluid > .content{
+  margin-left: 0;
+}
+
+.container-fluid {
+  padding: 40px 0 234px;
+}
+
+.columns {
+    background-color: #fff;
+    height: 100%;
+   
+}
+.code-area, .client-list-area{
+    background: #eee;
+    overflow:auto;
+    height: 100%;
+}
+
+.footer {
+  background: #ccc;
+  height: 200px;
 }

@@ -1,6 +1,5 @@
 .firepad {
-  /* Default height for a firepad. */
-  height: 400px;
+  height: 100%;
   position: relative;
 }
 

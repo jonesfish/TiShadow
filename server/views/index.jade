@@ -2,22 +2,20 @@
   .fill
     .container
       a(class="brand", href="#") TiShadow
-      //input#colorpicker.hide(data-default-value="#ffcc00", type="text", value=
-                    "#ffb987")
-.container
-  .row
-    .span9
-      h3 Enter your Titanium Code
+
       .button
         input(type='submit', id="tisubmit", value="Send Code (⌘+S)", onClick="sentData()")
+
+.container-fluid.wrapper
+  .row-fluid.columns.content
+    .span9.code-area      
       div(id="editor")
-    .span3
+    .span3.client-list-area
       h3 Devices
         ul.device_list
       h3 Users
         ul#user_list
-  .row
-    .span12
-      h3 Console
-      .console
+  .footer
+    h3 Console
+    .console
 
