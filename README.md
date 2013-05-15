@@ -1,6 +1,83 @@
 TiShadow
 ========
 
+This is @lis186 fork of [TiShadow](https://github.com/dbankier/TiShadow)
+
+TiShadow is the most powerful rapid prototyping tools for Appcelerator Titanium.
+This fork is focused on providing collaborative prototyping realtied functions.
+
+
+Collaborative coding in the browser
+===================================
+<img width="550px" src="https://www.evernote.com/shard/s1/sh/24d080a5-ffa2-47cb-b2e4-1673ec142e54/b79403cc68cf7294693dde9e47d894e7/deep/0/TiShadow.png">
+
+Start the TiShadow Server
+---------------------
+The server can be started by typing the following command:
+
+```
+./cli/tishadow server 
+
+```
+
+Start the TiShadow App
+----------------------
+
+Once the server is running launch the app. For example, to launch the
+app in the iPhone simulator using the Titanium CLI:
+
+```
+  cd ~/tishadowapp
+  titanium build -p iphone
+```
+
+From the app just enter the ip address or hostname of the computer running the
+server and hit connect. (There are also more advanced connection settings
+that can be used for remote server connections.)
+
+Code Snippets Via Webpage
+-------------------------
+ 
+Enter the following address in a browser window:
+
+```
+    http://localhost:3000/
+```
+In the editor you can enter code and press Command+s to deploy the code
+snippet to all connected devices.
+
+Collaborative coding
+---------------------
+Each time you open the page without hash.(ex. http://192.168.1.5:3000/)
+The page will generate a random hash for you. (ex. http://192.168.1.5:3000/#-IuaBTMt0IM-HOxaC9lC)
+Sent the url to others who what to join.
+When others get to the page, you will see him or her on the user list.
+Both of you can edit the code at the same time.
+Every one can change the name and color to represent themself.
+
+note: Don't sent localhost:3000 or 127.0.0.1:3000 to others, it is not going to work.
+
+Save code for later use
+-----------------------
+You can save the url to your bookmark, the code will be still there.
+
+Credits
+=======
+The project is forked from dbankier's[TiShadow](https://github.com/dbankier/TiShadow)
+
+The server code uses the following and are included:
+
+ * [node.js](http://nodejs.org/)
+ * [express](http://expressjs.com/)
+ * [socket.io](http://socket.io)
+ * [Twitter Bootstrap](http://twitter.github.com/bootstrap/)
+ * [Firepad](http://www.firepad.io/)
+
+The app is built using [Appcelerator](http://www.appcelerator.com/)'s
+Titanium.
+
+
+<!---
 TiShadow provides Titanium developers the ability to deploy apps, run tests or execute code snippets live across all running iOS and Android devices.
 
 There are three parts to TiShadow: the TiShadow server, TiShadow app and TiShadow CLI
@@ -368,6 +445,7 @@ Now using ti.compression:
 Feedback appreciated.
 
 @davidbankier
+-->
 
 
 
