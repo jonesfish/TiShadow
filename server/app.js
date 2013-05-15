@@ -162,7 +162,11 @@ sio.sockets.on('connection', function(socket) {
         }
       })
     });
-  })
+  });
+
+  socket.on('event', function(data) {
+    socket.broadcast.emit("fireEvent",data);
+  });
   // Disconnect
   socket.on('disconnect',function(data) {
     socket.get("host",function(err,host) {

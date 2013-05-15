@@ -51,8 +51,11 @@ var includes = [
   Ti.Database.open,
   Ti.Database.execute,
   Ti.Facebook,
+<<<<<<< HEAD
   Ti.Map,
   Ti.Geolocation,
+=======
+>>>>>>> f9a21e80d79ae16b71e6802b19717077d38dc83d
   Ti.Gesture
 ];
 if (Ti.Platform.osname !== "android"){
