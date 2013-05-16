@@ -1,4 +1,4 @@
-TiShadow
+TiSnippet (A collaborative version of TiShadow)
 ========
 
 This is @lis186 fork of [TiShadow](https://github.com/dbankier/TiShadow)

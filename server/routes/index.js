@@ -4,7 +4,7 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'TiShadow' });
+  res.render('index', { title: 'TiSnippet - A collaborative version of TiShadow' });
 };
 
 
