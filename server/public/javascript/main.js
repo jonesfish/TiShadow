@@ -26,6 +26,10 @@ var sentData = function(){
     TiShadow.socket.emit("snippet", {code: code});
   }
 
+var killApp = function(){
+   TiShadow.socket.emit("snippet", {code: 'this'});
+}
+
 var clearConsole = function(){
   $('.console').html('');
 }
@@ -39,6 +43,14 @@ function sentCodeInit() {
       sentData();
       return false;
     }
+    
+    if( lastKey && (lastKey == 91 && e.keyCode == 75) || (lastKey == 75 && e.keyCode == 91) ){
+      e.preventDefault();
+      console.log('ctrl+k');
+      killApp();
+      return false;
+    }
+    
     lastKey = e.keyCode;
   });
 }
