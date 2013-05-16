@@ -11,6 +11,11 @@ Collaborative coding in the browser
 ===================================
 <img width="550px" src="https://www.evernote.com/shard/s1/sh/24d080a5-ffa2-47cb-b2e4-1673ec142e54/b79403cc68cf7294693dde9e47d894e7/deep/0/TiShadow.png">
 
+Try the demo before host your own
+---------------------------------
+http://www.tisnippet.com:3000/
+
+
 Start the TiShadow Server
 ---------------------
 The server can be started by typing the following command:
