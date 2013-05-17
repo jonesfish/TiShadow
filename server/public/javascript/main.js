@@ -70,6 +70,9 @@ $(document).ready(function() {
   //// Initialize Firebase.
   var firepadRef = getFirepadRef(function(hash){
     TiShadow.init(hash);
+    $('#hostname').attr({"value": window.location.hostname});
+    $('#port').attr({"value": window.location.port});
+    $('#room').attr({"value": window.location.hash.substr(2)});
   });
 
   //// Create CodeMirror (with line numbers and the JavaScript mode).
