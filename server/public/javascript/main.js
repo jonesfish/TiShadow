@@ -70,8 +70,10 @@ $(document).ready(function() {
   //// Initialize Firebase.
   var firepadRef = getFirepadRef(function(hash){
     TiShadow.init(hash);
+    var port;
+    if(window.location.port==""){port=80;}
     $('#hostname').attr({"value": window.location.hostname});
-    $('#port').attr({"value": window.location.port});
+    $('#port').attr({"value": port});
     $('#room').attr({"value": window.location.hash.substr(2)});
   });
 
