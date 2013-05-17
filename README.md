@@ -9,11 +9,11 @@ This fork is focused on providing collaborative prototyping realtied functions.
 
 Collaborative coding in the browser
 ===================================
-<img width="550px" src="https://www.evernote.com/shard/s1/sh/24d080a5-ffa2-47cb-b2e4-1673ec142e54/b79403cc68cf7294693dde9e47d894e7/deep/0/TiShadow.png">
+<a href="http://www.flickr.com/photos/lis186/8747357544/" title="Flickr 上 lis186 的 TiSnippet -A collaborative version of TiShadow"><img src="http://farm8.staticflickr.com/7284/8747357544_6925d5223c_z.jpg" width="640" height="598" alt="TiSnippet -A collaborative version of TiShadow"></a>
 
-Try the demo before host your own
+Try the demo
 ---------------------------------
-http://www.tisnippet.com:3000/
+http://www.tisnippet.com/
 
 
 Start the TiShadow Server
@@ -36,9 +36,7 @@ app in the iPhone simulator using the Titanium CLI:
   titanium build -p iphone
 ```
 
-From the app just enter the ip address or hostname of the computer running the
-server and hit connect. (There are also more advanced connection settings
-that can be used for remote server connections.)
+Enter hostname, port and room in advanced connection settings in App to connect to the server.
 
 Code Snippets Via Webpage
 -------------------------
