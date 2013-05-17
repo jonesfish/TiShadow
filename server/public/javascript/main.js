@@ -1,8 +1,9 @@
 var TiShadow = {};
-TiShadow.init = function (session, guest){
+TiShadow.init = function (room){
+  console.log(room);
   var socket = io.connect();
   socket.on('connect', function(data) {
-    socket.emit("join", {name: 'controller'});
+    socket.emit("join", {name: 'controller', room: room});
   });
   socket.on('device_connect', function(e){
       $(".device_list").append('<li id="'+ e.id + '">' + e.name + '</li>');
@@ -65,10 +66,11 @@ function get_random_color() {
 }
 
 $(document).ready(function() {
-  TiShadow.init();
 
   //// Initialize Firebase.
-  var firepadRef = getFirepadRef();
+  var firepadRef = getFirepadRef(function(hash){
+    TiShadow.init(hash);
+  });
 
   //// Create CodeMirror (with line numbers and the JavaScript mode).
   var codeMirror = CodeMirror(document.getElementById('editor'), {

@@ -1,4 +1,4 @@
-function getFirepadRef() {
+function getFirepadRef(callback) {
   // Get hash from end of URL or generate a random one.
  var ref = new Firebase('https://tishadow-collaboration.firebaseIO.com/');
   var hash = window.location.hash.replace(/#/g, '');
@@ -12,5 +12,6 @@ function getFirepadRef() {
   if (typeof console !== 'undefined')
     console.log('Firebase data: ', ref.toString());
 
+  callback(hash.substr(1));
   return ref;
 }
