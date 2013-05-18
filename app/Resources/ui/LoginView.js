@@ -34,7 +34,8 @@ function LoginView() {
   var qrcodeButton = Ti.UI.createButton({
   	title: 'QR Code    ',
   	right: -15,
-  	top: -5
+  	top: -5,
+  	visible: false
   });
   
   ////
@@ -139,6 +140,7 @@ function LoginView() {
     leftTab.backgroundColor = 'transparent';
     rightTab.backgroundColor = '#4377d2';
     port.visible = colon.visible = room.visible = false;
+    qrcodeButton.visible = false;
     host.width = "280dp";
     container.height = "190dp";
   });
@@ -149,6 +151,7 @@ function LoginView() {
     rightTab.backgroundColor = 'transparent';
     leftTab.backgroundColor = '#4377d2';
     port.visible = colon.visible = room.visible = true;
+    qrcodeButton.visible = true;
   });
 
 
