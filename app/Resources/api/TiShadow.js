@@ -86,14 +86,14 @@ exports.launchApp = function(name) {
     exports.closeApp();
     p.clearCache();
     require("/api/Localisation").clear();
-<<<<<<< HEAD
+
     // Custom Fonts
     if (osname === "ipad" || osname === "iphone") {
       require("/api/Fonts").loadCustomFonts(name);
     }
-=======
+
     require("/api/Events").reset();
->>>>>>> f9a21e80d79ae16b71e6802b19717077d38dc83d
+
     Ti.App.fireEvent("tishadow:refresh_list");
     exports.currentApp = name;
     bundle = p.require("/app");
