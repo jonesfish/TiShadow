@@ -15,9 +15,12 @@
       div(id="editor")
     .span3.client-list-area
       h3 Connecte to this snippet
-        input(type='text', id="hostname",class="input-medium", placeholder="Hostname", readonly) %3A
-        input(type='text', id="port", class="input-mini", placeholder="Port", readonly)
-        input(type='text', id="room", class="input-medium", placeholder="Room", readonly)
+        ul
+          input(type='text', id="hostname",class="input-medium", placeholder="Hostname", readonly) %3A
+          input(type='text', id="port", class="input-mini", placeholder="Port", readonly)
+          input(type='text', id="room", class="input-medium", placeholder="Room", readonly)
+        ul
+          img(id="qrcode")
       h3 Devices
         ul.device_list
       h3 Users

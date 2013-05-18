@@ -75,6 +75,8 @@ $(document).ready(function() {
     $('#hostname').attr({"value": window.location.hostname});
     $('#port').attr({"value": port});
     $('#room').attr({"value": window.location.hash.substr(2)});
+    var qrcode = 'http://chart.apis.google.com/chart?cht=qr&chs=120x120&chl=' + escape(window.location.href);
+    $('#qrcode').attr('src', qrcode);
   });
 
   //// Create CodeMirror (with line numbers and the JavaScript mode).
