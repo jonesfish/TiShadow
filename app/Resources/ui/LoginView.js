@@ -51,6 +51,9 @@ function LoginView() {
 	 
 	// Sets up the scanner and starts it in a new window.
 	var openScanner = function() {
+	    if(Ti.Platform.osname === 'android'){
+			Ti.UI.Android.hideSoftKeyboard();
+		}
 		container.hide();
 	    // Instantiate the Scandit SDK Barcode Picker view
 	    picker = scanditsdk.createView({
