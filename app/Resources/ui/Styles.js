@@ -34,14 +34,15 @@ exports.login = {
 	},
 	header : {
 		top : "10dp",
+		left: "35dp",
 		height : "30dp",
 		font : {
 			fontSize : "16dp",
 			fontWeight : 'bold'
 		},
 		color: 'black',
-		text : "Connect to TiShadow Server",
-		textAlign : 'center'
+		text : "Connect to Server",
+		textAlign : 'left'
 	},
 	host : _.defaults({
 		left: "10dp",

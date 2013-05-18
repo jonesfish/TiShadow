@@ -32,9 +32,9 @@ function LoginView() {
   var room   = Ti.UI.createTextField(Styles.room);
 
   var qrcodeButton = Ti.UI.createButton({
-  	title: 'QR Code',
-  	right: 0,
-  	top: 0
+  	title: 'QR Code    ',
+  	right: -15,
+  	top: -5
   });
   
   ////
@@ -50,6 +50,7 @@ function LoginView() {
 	 
 	// Sets up the scanner and starts it in a new window.
 	var openScanner = function() {
+		container.hide();
 	    // Instantiate the Scandit SDK Barcode Picker view
 	    picker = scanditsdk.createView({
 	        width:"100%",
@@ -76,10 +77,12 @@ function LoginView() {
 	    		host.fireEvent('change');
 	    		port.fireEvent('change');
 	    		room.fireEvent('change');
+	    		button.fireEvent('click');
 	    		closeScanner();
 	    	}
 	    });
 	    picker.setCancelCallback(function(e) {
+	    	container.show();
 	        closeScanner();
 	    });
 	 
