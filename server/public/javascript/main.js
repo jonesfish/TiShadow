@@ -112,7 +112,6 @@ $(document).ready(function() {
   //// Create CodeMirror (with line numbers and the JavaScript mode).
   var codeMirror = CodeMirror(document.getElementById('editor'), {
     lineNumbers: true,
-    indentWithTabs: true,
     autoCloseBrackets: true,
     mode: 'javascript'
   });
