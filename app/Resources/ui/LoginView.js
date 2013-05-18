@@ -31,6 +31,107 @@ function LoginView() {
   var button = Ti.UI.createButton(Styles.button);
   var room   = Ti.UI.createTextField(Styles.room);
 
+  var qrcodeButton = Ti.UI.createButton({
+  	title: 'QR Code',
+  	right: 0,
+  	top: 0
+  });
+  
+  ////
+  
+  	// load the Scandit SDK module
+	var scanditsdk = require("com.mirasense.scanditsdk");
+	 
+	var scannerWindow = Ti.UI.createWindow({
+		backgroundColor: '#fff'
+	});
+	
+	var picker;
+	 
+	// Sets up the scanner and starts it in a new window.
+	var openScanner = function() {
+	    // Instantiate the Scandit SDK Barcode Picker view
+	    picker = scanditsdk.createView({
+	        width:"100%",
+	        height:"100%"
+	    });
+	    // Initialize the barcode picker, remember to paste your own app key here.
+	    picker.init("d5W+Tr8aEeKduW2TR4mL9bnB7moUgQV4Y19RCoOlJNU", 0);
+	 
+	    //picker.showSearchBar(true);
+	    picker.setQrEnabled(true);
+	    // add a tool bar at the bottom of the scan view with a cancel button (iphone/ipad only)
+	    picker.showToolBar(true);
+	 
+	    // Set callback functions for when scanning succeedes and for when the
+	    // scanning is canceled.
+	    picker.setSuccessCallback(function(e) {
+	    	if(e.symbology == 'QR'){
+	    		host.value = e.barcode.split('http://')[1].split('/#')[0];
+	    		port.value = 80;
+	    		room.value = e.barcode.split('/#-')[1];
+	    		if(typeof e.barcode.split(':')[2] != 'undefined'){
+	    			port.value = e.barcode.split(':')[2].split('/#')[0];
+	    		}
+	    		host.fireEvent('change');
+	    		port.fireEvent('change');
+	    		room.fireEvent('change');
+	    		closeScanner();
+	    	}
+	    });
+	    picker.setCancelCallback(function(e) {
+	        closeScanner();
+	    });
+	 
+	    scannerWindow.add(picker);
+	    scannerWindow.addEventListener('open', function(e) {
+	        // Adjust to the current orientation.
+	        // since window.orientation returns 'undefined' on ios devices
+	        // we are using Ti.UI.orientation (which is deprecated and no longer
+	        // working on Android devices.)
+	        if(Ti.Platform.osname == 'iphone' || Ti.Platform.osname == 'ipad'){
+	            picker.setOrientation(Ti.UI.orientation);
+	        }
+	        else {
+	            picker.setOrientation(window.orientation);
+	        }
+	 
+	        picker.setSize(Ti.Platform.displayCaps.platformWidth,
+	                       Ti.Platform.displayCaps.platformHeight);
+	        picker.startScanning();     // startScanning() has to be called after the window is opened.
+	    });
+	    scannerWindow.open();
+	}
+	 
+	// Stops the scanner, removes it from the window and closes the latter.
+	var closeScanner = function() {
+	    if (picker != null) {
+	        picker.stopScanning();
+	        scannerWindow.remove(picker);
+	    }
+	    scannerWindow.close();
+	}
+	 
+	// Changes the picker dimensions and the video feed orientation when the
+	// orientation of the device changes.
+	Ti.Gesture.addEventListener('orientationchange', function(e) {
+	    scannerWindow.orientationModes = [Titanium.UI.PORTRAIT, Titanium.UI.UPSIDE_PORTRAIT,
+	                   Titanium.UI.LANDSCAPE_LEFT, Titanium.UI.LANDSCAPE_RIGHT];
+	    if (picker != null) {
+	        picker.setOrientation(e.orientation);
+	        picker.setSize(Ti.Platform.displayCaps.platformWidth,
+	                Ti.Platform.displayCaps.platformHeight);
+	        // You can also adjust the interface here if landscape should look
+	        // different than portrait.
+	    }
+	});
+  
+  ////
+  
+  qrcodeButton.addEventListener('click', function(){
+  	openScanner();
+  });
+
   leftTab.addEventListener('click', function() {
     leftTab.backgroundColor = 'transparent';
     rightTab.backgroundColor = '#4377d2';
@@ -108,6 +209,8 @@ function LoginView() {
   container.add(colon);
   container.add(port);
   container.add(room);
+  container.add(qrcodeButton);
+  
 
   window.add(container);
 
